@@ -1,0 +1,21 @@
+# Nix build results
+result
+result-*
+
+# Direnv (Environment Variablen Cache)
+.direnv
+.envrc
+
+# Sops / Age Keys (NIEMALS hochladen!)
+# Wir laden nur die verschlüsselte 'secrets.yaml' hoch,
+# nicht die privaten Schlüssel oder entschlüsselte Dateien.
+keys.txt
+*.dec
+
+# Editor temporary files
+*.swp
+*~
+*.bak
+.DS_Store
+.vscode/
+.idea/
