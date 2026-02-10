@@ -73,14 +73,18 @@
     };
   };
 
-  # --- Git ---
+  # --- Git Konfiguration ---
+  # Zusammengefasst in einen einzigen Block, um "already defined" Fehler zu vermeiden
   programs.git = {
     enable = true;
-    userName = "haku";
-    userEmail = "rootlogic7@proton.me";
+    userName = "rootlogic7";             
+    userEmail = "rootlogic7@proton.me"; 
+    
     extraConfig = {
       init.defaultBranch = "main";
       pull.rebase = true;
+      # Sicherheit: Verhindert dubiose Git-Fehler bei Owner-Wechsel
+      safe.directory = "/etc/nixos";
     };
   };
 
