@@ -23,12 +23,12 @@
   
   # --- Kernel & Scheduler (CachyOS Magic) ---
   # Nutzung des optimierten CachyOS Kernels
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  # boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   # Scheduler-Ext (scx) Aktivierung
   # scx_lavd ist optimiert für Latenz & Interaktivität (perfekt für Desktop/Gaming auf weniger Kernen)
   services.scx = {
-    enable = true;
+    enable = false;
     scheduler = "scx_lavd"; 
   };
 

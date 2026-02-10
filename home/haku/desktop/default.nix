@@ -37,8 +37,8 @@
 
       # --- Gesten (Touchscreen/Touchpad) ---
       gestures = {
-        workspace_swipe = true;
-        workspace_swipe_fingers = 3;
+        # workspace_swipe = true;
+        # workspace_swipe_fingers = 3;
       };
 
       # --- Aussehen & Verhalten ---
@@ -61,7 +61,6 @@
             enabled = true;
             range = 4;
             render_power = 3;
-            color = "rgba(1a1a1aee)";
         };
       };
 
@@ -119,8 +118,8 @@
         "$mod SHIFT, S, movetoworkspace, special:magic"
 
         # Maus-Bewegung
-        "mouse:272, movewindow"
-        "mouse:273, resizewindow"
+        # "mouse:272, movewindow"
+        # "mouse:273, resizewindow"
       ];
 
       # Media Keys (Lautstärke, Helligkeit) - Wichtig für Laptop!

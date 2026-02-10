@@ -38,7 +38,7 @@
 
   # Garbage Collection: Wöchentlich alten Müll rausbringen
   nix.gc = {
-    enable = true;
+    automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };

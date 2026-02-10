@@ -1,12 +1,14 @@
 { pkgs, inputs, ... }:
 
 {
+  hardware.graphics.enable = true;
+
   # --- Hyprland (System-Wide) ---
   programs.hyprland = {
     enable = true;
     # Wir nutzen das Hyprland-Paket aus 'unstable' für bleeding-edge Features
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.hyprland;
-    portalPackage = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    #package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.hyprland;
+    #portalPackage = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
 
   # --- Display Manager (Login) ---
@@ -14,16 +16,16 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    # Standard-Session auf Hyprland setzen
-    defaultSession = "hyprland";
   };
+
+  services.displayManager.defaultSession = "hyprland";
 
   # --- Fonts ---
   # Nerd Fonts sind essentiell für Icons in Waybar, Yazi und Starship.
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     font-awesome
     # Nerd Fonts (moderne Syntax für NixOS 25.05+)
     nerd-fonts.jetbrains-mono
