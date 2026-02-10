@@ -50,7 +50,7 @@
       
       # NixOS Helpers
       rebuild = "sudo nixos-rebuild switch --flake ~/kami-nix#shikigami";
-      update = "nix flake update ~/kami-nix";
+      update = "nix flake update --flake ~/kami-nix";
     };
 
     history = {
