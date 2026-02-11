@@ -1,6 +1,9 @@
 { pkgs, pkgs-unstable, ... }:
 
 {
+  # --- Stylix Fix ---
+  # Wir sagen Stylix explizit, welches Firefox-Profil gethemed werden soll.
+  stylix.targets.firefox.profileNames = [ "default" ];
   # --- Terminal: Kitty ---
   programs.kitty = {
     enable = true;

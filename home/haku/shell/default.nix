@@ -74,13 +74,16 @@
   };
 
   # --- Git Konfiguration ---
-  # Zusammengefasst in einen einzigen Block, um "already defined" Fehler zu vermeiden
   programs.git = {
     enable = true;
-    userName = "rootlogic7";             
-    userEmail = "rootlogic7@proton.me"; 
     
-    extraConfig = {
+    # NEU: Alles wandert in 'settings'
+    settings = {
+      user = {
+        name = "rootlogic7";
+        email = "rootlogic7@proton.me";
+      };
+      
       init.defaultBranch = "main";
       pull.rebase = true;
       # Sicherheit: Verhindert dubiose Git-Fehler bei Owner-Wechsel

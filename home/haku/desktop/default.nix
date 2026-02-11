@@ -93,14 +93,13 @@
         "$mod, Q, killactive,"
         "$mod, F, togglefloating,"
         "$mod, P, pseudo," # Dwindle Effekt
-        "$mod, J, togglesplit," # Horizontal/Vertikal Switch
+        "$mod, Z, togglesplit," # Horizontal/Vertikal Switch
 
         # Fokus bewegen (Pfeiltasten oder HJKL)
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
-
+        "$mod, h, movefocus, l"
+        "$mod, j, movefocus, d"
+        "$mod, k, movefocus, u"
+        "$mod, l, movefocus, r"
         # Workspaces wechseln (1-10)
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
@@ -132,11 +131,13 @@
       ];
     };
   };
-
   # Notification Daemon (Mako)
   services.mako = {
     enable = true;
-    defaultTimeout = 5000;
+    # NEU: Settings Block statt direkter Option
+    settings = {
+      default-timeout = 5000;
+    };
     # Stylix übernimmt das Styling (Farben, Fonts, Border)
   };
 }
