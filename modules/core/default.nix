@@ -25,7 +25,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Tastatur: Deutsch (für die Konsole)
-  console.keyMap = "de";
+  # console.keyMap = "de";
 
   # --- Nix Konfiguration ---
   nix.settings = {

@@ -63,13 +63,5 @@
       desktop = 1.0;
       popups = 0.95;
     };
-    
-    # --- Targets (Was soll gestylt werden?) ---
-    # Stylix kümmert sich automatisch um fast alles (GRUB, GTK, Hyprland, etc.)
-    # Hier können wir Ausnahmen definieren.
-    targets = {
-      # Beispiel: Falls wir Neovim komplett manuell stylen wollen, setzen wir dies auf false.
-      # nixvim.enable = false; 
-    };
   };
 }

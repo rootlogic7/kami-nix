@@ -1,53 +1,74 @@
 { pkgs, inputs, ... }:
 
+let
+  # Wir definieren das Astronaut-Theme als eigenes Paket
+  sddm-astronaut = pkgs.stdenv.mkDerivation {
+    name = "sddm-astronaut";
+    src = pkgs.fetchFromGitHub {
+      owner = "keyitdev";
+      repo = "sddm-astronaut-theme";
+      rev = "master";
+      # ACHTUNG: Das wird beim ersten Mal fehlschlagen (Hash mismatch).
+      # Nix wird dir den richtigen Hash sagen, den du dann hier einträgst!
+      sha256 = "sha256-+94WVxOWfVhIEiVNWwnNBRmN+d1kbZCIF10Gjorea9M";
+    };
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes/sddm-astronaut-theme
+      cp -r * $out/share/sddm/themes/sddm-astronaut-theme/
+      
+      # Optional: Config anpassen (z.B. für Custom Background)
+      # Wir lassen erstmal den Standard (Space Animation/Bild)
+    '';
+  };
+in
 {
   hardware.graphics.enable = true;
 
-  # --- Hyprland (System-Wide) ---
-  programs.hyprland = {
-    enable = true;
-    # Wir nutzen das Hyprland-Paket aus 'unstable' für bleeding-edge Features
-    #package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.hyprland;
-    #portalPackage = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.xdg-desktop-portal-hyprland;
-  };
+  # --- Hyprland ---
+  programs.hyprland.enable = true;
 
-  # --- Display Manager (Login) ---
-  # Wir nutzen SDDM, da es hervorragend mit Stylix themebar ist.
+  # --- Display Manager (SDDM) ---
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
+    package = pkgs.kdePackages.sddm; # Qt6 Standard
+    
+    # Theme Aktivierung
+    theme = "sddm-astronaut-theme";
+    
+    # X11 Backend ist am sichersten für Login-Themes
+    wayland.enable = false;
+    enableHidpi = true;
+
+    extraPackages = with pkgs.kdePackages; [
+      qtsvg
+      qtmultimedia  # Zwingend nötig für Animationen/Videos!
+      qtdeclarative
+      qtvirtualkeyboard # Falls du die Tastatur doch willst, sonst weglassen
+    ];
   };
 
   services.displayManager.defaultSession = "hyprland";
 
-  # --- Fonts ---
-  # Nerd Fonts sind essentiell für Icons in Waybar, Yazi und Starship.
+  # --- XServer (für SDDM X11 Backend) ---
+  services.xserver = {
+    enable = true;
+    xkb = {
+      layout = "de";
+      variant = "";
+    };
+  };
+  
+  console.useXkbConfig = true;
+
+  # --- Fonts & Sonstiges ---
   fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    font-awesome
-    # Nerd Fonts (moderne Syntax für NixOS 25.05+)
     nerd-fonts.jetbrains-mono
+    font-awesome
   ];
 
-  # --- Environment Variables ---
-  environment.sessionVariables = {
-    # Zwingt Electron-Apps (VS Code, Discord) dazu, Wayland zu nutzen
-    NIXOS_OZONE_WL = "1";
-  };
-
-  # --- XDG Portals ---
-  # Notwendig für Screen-Sharing und Datei-Öffnen-Dialoge
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
-  
-  # --- Sonstiges ---
-  # DConf ist notwendig, damit GTK-Apps ihre Einstellungen speichern können
-  programs.dconf.enable = true;
-  
-  # Polkit Agent für GUI-Passwortabfragen
-  security.polkit.enable = true;
+  # --- Theme Paket installieren ---
+  environment.systemPackages = [
+    sddm-astronaut
+    # Weitere Pakete...
+  ];
 }

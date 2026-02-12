@@ -4,6 +4,7 @@
   imports = [
     ./waybar.nix
     ./launcher.nix
+    ./hyprlock.nix
   ];
 
   # --- Hyprland Konfiguration ---
