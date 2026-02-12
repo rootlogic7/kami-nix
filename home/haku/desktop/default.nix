@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   imports = [
@@ -13,7 +13,6 @@
     
     # Stylix konfiguriert automatisch Farben, Rahmen und Schriftarten!
     # Wir kümmern uns hier nur um die Logik.
-
     settings = {
       # Variablen Definition
       "$mod" = "SUPER";
@@ -48,6 +47,8 @@
         gaps_out = 10;
         border_size = 2;
         layout = "dwindle"; # Das Standard Tiling-Layout
+	"col.active_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base0E})";
+        "col.inactive_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base02})";
       };
 
       decoration = {
