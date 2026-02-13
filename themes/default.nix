@@ -68,7 +68,6 @@
     targets = {
       # Wenn du die TTY (Boot-Nachrichten/Konsole) NICHT gefärbt haben willst:
       console.enable = false; 
-      
       # SDDM machen wir ja manuell, also hier deaktiviert lassen (wie im Code zuvor gelöscht)
       # sddm.enable = false; # (Nicht nötig einzufügen, wenn es schon weg ist)
     };

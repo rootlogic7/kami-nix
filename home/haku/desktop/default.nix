@@ -7,6 +7,13 @@
     ./hyprlock.nix
   ];
 
+  home.packages = with pkgs; [
+    # Screenshot Tool
+    hyprshot
+    # Optional: wl-clipboard (falls noch nicht da), damit Hyprshot in die Zwischenablage kopieren kann
+    wl-clipboard 
+  ];
+
   # --- Hyprland Konfiguration ---
   wayland.windowManager.hyprland = {
     enable = true;
@@ -117,7 +124,15 @@
         # Special Workspace (Scratchpad)
         "$mod, S, togglespecialworkspace, magic"
         "$mod SHIFT, S, movetoworkspace, special:magic"
+        
+	# Screenshot: Ganzer Monitor -> Clipboard
+        ", PRINT, exec, hyprshot -m output --clipboard-only"
+        
+        # Screenshot: Aktives Fenster -> Clipboard
+        "$mod, PRINT, exec, hyprshot -m window --clipboard-only"
 
+        # Screenshot: Region auswählen -> Clipboard (Der wichtigste!)
+        "$mod SHIFT, S, exec, hyprshot -m region --clipboard-only"
         # Maus-Bewegung
         # "mouse:272, movewindow"
         # "mouse:273, resizewindow"
