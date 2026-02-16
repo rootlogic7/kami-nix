@@ -44,7 +44,7 @@
       systems = [ "x86_64-linux" ];
       
       # Helper, um System-Argumente konsistent zu übergeben
-      mkSystem = { hostname, user, system ? "x86_64-linux" }:
+      mkSystem = { hostname, user, theme ? "ghibli", system ? "x86_64-linux" }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -73,7 +73,7 @@
 
             # Stylix Theming
             stylix.nixosModules.stylix
-            ./themes
+	    ./themes/${theme}
 
             # Home Manager Integration
             home-manager.nixosModules.home-manager
@@ -104,6 +104,7 @@
         shikigami = mkSystem {
           hostname = "shikigami";
           user = "haku";
+	  theme = "killua";
         };
 
         # Der Flussgeist (High-End PC)

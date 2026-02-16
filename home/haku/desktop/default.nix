@@ -21,12 +21,31 @@
     # Stylix konfiguriert automatisch Farben, Rahmen und Schriftarten!
     # Wir kümmern uns hier nur um die Logik.
     settings = {
+      # --- MONITOR SETUP ---
+      monitor = [
+        # DP-4 (Extern): 1280x1024, beginnt bei X=43, Y=0 (oben, zentriert)
+        "DP-4,1280x1024@60.02,43x0,1"
+        
+        # eDP-1 (Laptop): 1366x768, beginnt bei X=0, Y=1024 (unten, unter DP-4)
+        "eDP-1,1366x768@60.06,0x1024,1"
+        
+        # Fallback: Falls du mal einen anderen Monitor ansteckst
+        ",preferred,auto,1"
+      ];
+
       # Variablen Definition
       "$mod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "kitty -e yazi";
       "$menu" = "rofi -show drun -show-icons";
       "$browser" = "firefox";
+
+      exec-once = [
+        "waybar"
+        "nm-applet --indicator"
+        "blueman-applet"
+        # "hyprpaper" # Falls du hyprpaper statt Stylix nutzt
+      ];
 
       # --- Eingabegeräte ---
       input = {
@@ -137,6 +156,10 @@
         # "mouse:272, movewindow"
         # "mouse:273, resizewindow"
       ];
+      # bindm = [
+	# "mouse:272, movewindow"
+	# "mouse:273, resizewindow"
+      # ];
 
       # Media Keys (Lautstärke, Helligkeit) - Wichtig für Laptop!
       bindel = [
