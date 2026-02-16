@@ -42,9 +42,6 @@
 
       exec-once = [
         "waybar"
-        "nm-applet --indicator"
-        "blueman-applet"
-        # "hyprpaper" # Falls du hyprpaper statt Stylix nutzt
       ];
 
       # --- Eingabegeräte ---
@@ -152,14 +149,7 @@
 
         # Screenshot: Region auswählen -> Clipboard (Der wichtigste!)
         "$mod SHIFT, S, exec, hyprshot -m region --clipboard-only"
-        # Maus-Bewegung
-        # "mouse:272, movewindow"
-        # "mouse:273, resizewindow"
       ];
-      # bindm = [
-	# "mouse:272, movewindow"
-	# "mouse:273, resizewindow"
-      # ];
 
       # Media Keys (Lautstärke, Helligkeit) - Wichtig für Laptop!
       bindel = [
@@ -174,10 +164,8 @@
   # Notification Daemon (Mako)
   services.mako = {
     enable = true;
-    # NEU: Settings Block statt direkter Option
     settings = {
       default-timeout = 5000;
     };
-    # Stylix übernimmt das Styling (Farben, Fonts, Border)
   };
 }

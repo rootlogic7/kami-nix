@@ -15,11 +15,14 @@
       
       window#waybar {
         background-color: #${config.lib.stylix.colors.base00};
-        color: #${config.lib.stylix.colors.base05};
+        color: #${config.lib.stylix.colors.base03};
         border-bottom: 2px solid #${config.lib.stylix.colors.base0E};
       }
 
       /* --- WORKSPACES --- */
+      #workspaces {
+        margin-left: 12px;
+      }
       #workspaces button {
         padding: 0 5px;
         color: #${config.lib.stylix.colors.base0D};
@@ -46,29 +49,21 @@
       }
 
       #workspaces button.empty { color: #${config.lib.stylix.colors.base03}; }
-      #workspaces button.active { color: #${config.lib.stylix.colors.base0B}; }
+      #workspaces button.active { color: #${config.lib.stylix.colors.base05}; }
       #workspaces button.urgent { color: #${config.lib.stylix.colors.base08}; }
 
       /* --- FENSTERTITEL --- */
       #window {
-        color: #${config.lib.stylix.colors.base05};
+        color: #${config.lib.stylix.colors.base03};/*Oder 05*/
         padding: 0 10px;
       }
 
       /* --- MODULE LAYOUT --- */
       /* Wir entfernen die großen Margins, da wir jetzt Trennstriche haben */
-      #clock, #cpu, #memory, #battery, #network, #pulseaudio, #tray, #custom-sep {
+      #clock, #cpu, #memory, #battery, #network, #pulseaudio, #custom-sep {
         padding: 0 6px;
       }
-      #tray {
-        padding: 0 10px;
-        margin: 0 4px;
-        min-width: 80px; 
-      }
-      #tray menu {
-        background-color: #${config.lib.stylix.colors.base00};
-        color: #${config.lib.stylix.colors.base05};
-      }
+
       /* --- TRENNSTRICHE --- */
       #custom-sep {
         color: #${config.lib.stylix.colors.base03}; /* Dunkelgrau, damit sie nicht ablenken */
@@ -84,7 +79,10 @@
       #cpu.critical, #memory.critical { color: #${config.lib.stylix.colors.base08}; } /* Kritisch: Rot */
 
       /* BATTERIE */
-      #battery { color: #${config.lib.stylix.colors.base0B}; }
+      #battery {
+        color: #${config.lib.stylix.colors.base0B};
+	margin-right: 12px;
+      }
       #battery.charging { color: #${config.lib.stylix.colors.base0D}; }
       #battery.warning:not(.charging) { color: #${config.lib.stylix.colors.base0A}; }
       #battery.critical:not(.charging) { 
@@ -119,7 +117,7 @@
         # Die Module mit Trennstrichen (custom/sep) versehen
         modules-left = [ "hyprland/workspaces" "custom/sep" "hyprland/window" ];
         modules-center = [ "clock" ];
-        modules-right = [ "pulseaudio" "custom/sep" "network" "custom/sep" "cpu" "custom/sep" "memory" "custom/sep" "battery" "custom/sep" "tray" ];
+        modules-right = [ "pulseaudio" "custom/sep" "network" "custom/sep" "cpu" "custom/sep" "memory" "custom/sep" "battery" ];
 
         # --- DER TRENNSTRICH ---
         "custom/sep" = {
@@ -191,12 +189,6 @@
           format-bluetooth = "波 <span color='#${config.lib.stylix.colors.base05}'>{volume}%</span>";
           format-muted = "静 <span color='#${config.lib.stylix.colors.base05}'>Muted</span>";
           on-click = "pavucontrol";
-        };
-        
-        "tray" = {
-          icon-size = 18;
-          spacing = 10;
-	  show-passive-items = true;
         };
       };
     };
